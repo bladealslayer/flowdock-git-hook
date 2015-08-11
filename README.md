@@ -2,9 +2,13 @@
 
 Git Post-Receive hook for [Flowdock](http://flowdock.com).
 
+## Note
+
+Version 1.0. supports only source flow tokens. 0.x versions use a deprecated API which will be removed soon.
+
 ## Installation
 
-First, you need to install this gem. You need to have Ruby 1.8.6 and Rubygems installed in your system.
+First, you need to install this gem. You need to have Ruby and Rubygems installed in your system.
 
     $ gem install flowdock-git-hook
 
@@ -13,15 +17,31 @@ Then, download the post-receive hook file to the hooks directory and make it exe
     $ wget -O hooks/post-receive https://raw.github.com/flowdock/flowdock-git-hook/master/post-receive
     $ chmod +x hooks/post-receive
 
-Configure your Flow API tokens to git configuration
+Set the source flow token given to you by the Flowdock git configuration service
 
-    $ git config flowdock.token <Flow API token>
+    $ git config flowdock.token <source flow token>
 
 After this, you should get updates from your git repo every time you push to it.
 
 ## Configuration
 
 Service specific instructions for [Gitlab](https://github.com/flowdock/flowdock-git-hook/wiki/Gitlab) and [Redmine](https://github.com/flowdock/flowdock-git-hook/wiki/Redmine) can be found in [Wiki](https://github.com/flowdock/flowdock-git-hook/wiki).
+
+### Permanent references
+
+By default each push to the `master` branch will generate a new thread containing just the commits that were pushed. Pushes to other branches or tags will be grouped to a single thread containing all the pushed commits. You can configure this behaviour by setting the `permanent-reference` git variable. The value of that configuration parameter should be a comma separated list of regular expressions.
+
+For example to create new threads for each push to the `master` branch and any branch starting with `with-regex-` do this
+
+    $ git config flowdock.permanent-references "refs/heads/master, refs/heads/with-regex-.*"
+
+
+### Repository name
+
+The repository name displayed in the inbox message can be set with `repository-name`
+
+    $ git config flowdock.repository-name "my repo"
+
 
 ### Repository URL
 
@@ -41,7 +61,7 @@ The `%s` will be replaced with the commit SHA.
 
 Commit messages in Team Inbox can have a action for viewing the commit diff. To enable the Diff action for comparing commits, configure a `diff-url-pattern`:
 
-     $ gitconfig flowdock.diff-url-pattern "http://example.com/mygitviewer/compare/%s...%s"
+     $ git config flowdock.diff-url-pattern "http://example.com/mygitviewer/compare/%s...%s"
 
 ## Advanced usage
 
