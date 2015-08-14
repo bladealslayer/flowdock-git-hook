@@ -5,11 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = "gitlab-flowdock-git-hook"
-  s.version = "0.4.2.2"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib"]
   s.authors = ["Ville Lautanala", "Boyan Tabakov"]
-  s.date = "2013-10-03"
+  s.date = "2015-08-11"
   s.email = "blade@alslayer.net"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -29,14 +30,12 @@ Gem::Specification.new do |s|
     "lib/flowdock/git.rb",
     "lib/flowdock/git/builder.rb",
     "post-receive",
-    "spec/builder_spec.rb",
     "spec/flowdock_git_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = "http://github.com/bladealslayer/flowdock-git-hook"
   s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.5"
+  s.rubygems_version = "2.4.1"
   s.summary = "Git Post-Receive hook for Flowdock. Gem requirements patched for use with Gitlab."
 
   if s.respond_to? :specification_version then
@@ -45,6 +44,8 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<gitlab-grit>, [">= 2.4.1"])
       s.add_runtime_dependency(%q<multi_json>, [">= 0"])
+      s.add_runtime_dependency(%q<flowdock>, ["~> 0.7"])
+      s.add_development_dependency(%q<byebug>, [">= 0"])
       s.add_development_dependency(%q<rdoc>, [">= 2.4.2"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0"])
@@ -54,6 +55,8 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<gitlab-grit>, [">= 2.4.1"])
       s.add_dependency(%q<multi_json>, [">= 0"])
+      s.add_dependency(%q<flowdock>, ["~> 0.7"])
+      s.add_dependency(%q<byebug>, [">= 0"])
       s.add_dependency(%q<rdoc>, [">= 2.4.2"])
       s.add_dependency(%q<rspec>, ["~> 2.8"])
       s.add_dependency(%q<bundler>, ["~> 1.0"])
@@ -64,6 +67,8 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<gitlab-grit>, [">= 2.4.1"])
     s.add_dependency(%q<multi_json>, [">= 0"])
+    s.add_dependency(%q<flowdock>, ["~> 0.7"])
+    s.add_dependency(%q<byebug>, [">= 0"])
     s.add_dependency(%q<rdoc>, [">= 2.4.2"])
     s.add_dependency(%q<rspec>, ["~> 2.8"])
     s.add_dependency(%q<bundler>, ["~> 1.0"])
